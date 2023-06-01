@@ -3,19 +3,19 @@ def get_ops():
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
         '*': lambda x, y: x * y,
-        '/': lambda x, y: x / y
+        '/': lambda x, y: x / y,
     }
 
 
 def calculator():
-    d = get_ops()
+    ops = get_ops()
 
     try:
-        a = float(input('Введите A: '))
+        number1 = float(input('Введите A: '))
         op = input('Введите операцию: ')
-        b = float(input('Введите B: '))
+        number2 = float(input('Введите B: '))
 
-        res = d[op](a, b)
+        res = ops[op](number1, number2)
     except ValueError:
         print('Неверный формат числа!')
         return
@@ -27,5 +27,4 @@ def calculator():
         return
 
     print('Результат:')
-    print(f'{a} {op} {b} = {res}')
-
+    print(f'{number1} {op} {number2} = {res}')
