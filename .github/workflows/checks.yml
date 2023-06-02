@@ -26,3 +26,8 @@ jobs:
         run: flake8 .
       - name: Run pyinstaller
         run: pyinstaller --onefile main.py
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist/main.exe
