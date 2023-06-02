@@ -26,7 +26,14 @@ jobs:
         run: flake8 .
       - name: Run pyinstaller
         run: pyinstaller --onefile main.py
-      - name: Upload artifacts
+      - name: Upload artifacts to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Artifacts
+          document: dist/main
+      - name: Upload artifacts to Github
         uses: actions/upload-artifact@v3
         with:
           name: build
