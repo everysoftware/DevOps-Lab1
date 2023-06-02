@@ -1,6 +1,6 @@
-import numpy as np
+from random import randint
 
 
 def rand():
-    number = np.random.randint(1, 1_000_000)
+    number = randint(1, 1_000_000)
     print(f'Случайное число: {number}')
