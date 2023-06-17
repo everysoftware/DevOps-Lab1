@@ -40,13 +40,23 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-calculator:latest
       - name: Run pyinstaller
         run: pyinstaller --onefile main.py
-      - name: Create an archive
-        run: tar acvf artifacts.zip dist/*
       - name: Upload artifacts to Github
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: artifacts.zip
+          path: dist
+  telegram_notification:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: Download artifacts from Github
+        uses: actions/download-artifact@v2.1.1
+        with:
+          name: build
+      - name: Create an archive
+        run: |
+          sudo apt-get update
+          sudo apt-get install zip
+          zip -r build.zip dist
       - name: Upload artifacts to Telegram
         uses: appleboy/telegram-action@master
         with:
@@ -58,4 +68,4 @@ jobs:
             Repository: ${{ github.repository }}
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             Artifacts:
-          document: artifacts.zip
+          document: build.zip
