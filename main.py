@@ -28,6 +28,7 @@ def calculator():
 
     print('Результат:')
     print(f'{number1} {op} {number2} = {res}')
+    input()
 
 
 def main():
