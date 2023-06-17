@@ -46,6 +46,7 @@ jobs:
           name: build
           path: dist
   telegram_notification:
+    needs: build
     runs-on: [ ubuntu-latest ]
     steps:
       - name: Download artifacts from Github
