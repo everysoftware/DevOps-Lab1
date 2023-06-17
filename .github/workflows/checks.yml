@@ -11,7 +11,7 @@ jobs:
     runs-on: [ self-hosted ]
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.11.0"]
     steps:
       - uses: actions/checkout@v3
       - name: Install python ${{ matrix.python-version }}
@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-calculator:latest
       - name: Run pyinstaller
-        run: pyinstaller --onefile main.py
+        run: pyinstaller --onefile --name my_calculator main.py
       - name: Upload artifacts to Github
         uses: actions/upload-artifact@v3
         with:
@@ -57,7 +57,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install zip
-          zip -r build.zip dist
+          zip -r build.zip my_calculator.exe
       - name: Upload artifacts to Telegram
         uses: appleboy/telegram-action@master
         with:
